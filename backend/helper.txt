@@ -1,0 +1,47 @@
+http://127.0.0.1:8000/docs
+npx expo start
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+
+
+
+def print_assigned_lessons():
+    print("\n📘 Assigned Lessons:")
+    for lesson in assigned_lessons:
+        print(f"🔹 Lesson ID: {lesson.lesson_id}")
+        print(f"   📅 Day: {lesson.day}")
+        print(f"   ⏰ Time: {lesson.start_time.strftime('%H:%M')} - {lesson.end_time.strftime('%H:%M')}")
+        print(f"   🏊 Swim Style: {lesson.swim_style}")
+        print(f"   👨‍🏫 Instructor: {lesson.instructor.name if lesson.instructor else 'None'}")
+        print(f"   👥 Students: {', '.join(student.name for student in lesson.students)}\n")
+
+    print("unassigned_lessons")
+
+    for lesson in unassigned_lessons:
+        print(f"🔹 Lesson ID: {lesson.lesson_id}")
+        print(f"   🏊 Swim Style: {lesson.swim_style}")
+        print(f"   👥 Students: {', '.join(student.name for student in lesson.students)}\n")
+
+
+def print_time_slots():
+    for day, slots in time_slots.items():
+        print(f"\n📅 {day}:")
+        for start_time, details in sorted(slots.items(), key=lambda x: int(x[0].split(":")[0])):
+            end_hour = int(start_time.split(":")[0]) + 1
+            time_range = f"{start_time} - {end_hour}:00"
+
+            # Format instructor names
+            instructor_names = [instructor.name for instructor in details["instructors"]]
+            instructors_str = ", ".join(instructor_names) if instructor_names else "None"
+
+            print(f"  ⏰ {time_range}")
+            print(f"     👨‍🏫 Instructors: {instructors_str}")
+
+            # Go through all predefined swim styles
+            for swim_style in ["freestyle", "breaststroke", "butterfly", "backstroke"]:
+                student_list = details["students"].get(swim_style, [])
+                student_names = ", ".join(student.name for student in student_list) if student_list else "None"
+                print(f"     🏊 {swim_style.capitalize()}: {student_names}")
+
+
+

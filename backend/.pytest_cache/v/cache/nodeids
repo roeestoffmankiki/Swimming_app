@@ -1,0 +1,7 @@
+[
+  "test_schedule.py::test_assign_lessons",
+  "test_schedule.py::test_flexible_private_students_reassigned",
+  "test_schedule.py::test_max_students_limit",
+  "test_schedule.py::test_prevent_duplicate_submission",
+  "test_schedule.py::test_student_submission"
+]

@@ -1,0 +1,4 @@
+{
+  "test_schedule.py::test_assign_lessons": true,
+  "test_schedule.py::test_flexible_private_students_reassigned": true
+}
